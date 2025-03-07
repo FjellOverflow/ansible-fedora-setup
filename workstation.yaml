@@ -46,6 +46,9 @@
           - zsh
           - bat
           - syncthing
+          - gnome-tweaks
+          - timeshift
+          - gparted
 
     - name: Install flatpaks
       community.general.flatpak:
@@ -55,10 +58,10 @@
           - md.obsidian.Obsidian
           - org.videolan.VLC
           - com.mattjakeman.ExtensionManager
-          - org.gnome.Extensions
           - com.brave.Browser
           - org.inkscape.Inkscape
           - com.bitwarden.desktop
+          - com.mattjakeman.ExtensionManager
 
     - name: Install external packages
       include_tasks: "tasks/packages/install-{{ item }}.yaml"
