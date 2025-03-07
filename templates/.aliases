@@ -1,0 +1,3 @@
+alias ls="k -h"
+alias l="k -ah"
+alias cat="bat"

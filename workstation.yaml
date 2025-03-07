@@ -1,0 +1,78 @@
+---
+- name: Setup
+  hosts: all
+  become: true
+  tasks:
+    - name: Get current user
+      set_fact:
+        username: "{{ lookup('env', 'USER') }}"
+
+    - name: Remove packages
+      ansible.builtin.dnf:
+        name:
+          - gnome-tour
+          - yelp
+          - rhythmbox
+          - gnome-weather
+          - gnome-contacts
+          - gnome-calendar
+          - gnome-clocks
+          - gnome-maps
+          - gnome-characters
+          - mediawriter
+          - totem
+          - abrt-desktop
+          - abrt-gui
+          - gnome-abrt
+          - simple-scan
+          - firefox-langpacks
+          - firefox
+        state: absent
+
+    - name: Upgrade packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+
+    - name: Install packages
+      ansible.builtin.dnf:
+        name:
+          - curl
+          - wget
+          - git
+          - tmux
+          - ncdu
+          - tree
+          - zsh
+          - bat
+          - syncthing
+
+    - name: Install flatpaks
+      community.general.flatpak:
+        name:
+          - org.freefilesync.FreeFileSync
+          - org.gimp.GIMP
+          - md.obsidian.Obsidian
+          - org.videolan.VLC
+          - com.mattjakeman.ExtensionManager
+          - org.gnome.Extensions
+          - com.brave.Browser
+          - org.inkscape.Inkscape
+          - com.bitwarden.desktop
+
+    - name: Install external packages
+      include_tasks: "tasks/packages/install-{{ item }}.yaml"
+      loop:
+        - docker
+        - vscode
+        - mullvad
+        - tailscale
+
+    - import_tasks: tasks/setup-zsh.yaml
+
+    - name: Enable passwordless sudo for {{username}}
+      ansible.builtin.lineinfile:
+        dest: /etc/sudoers
+        regexp: "^%wheel"
+        line: "{{username}} ALL=(ALL) NOPASSWD: ALL"
+        validate: "/usr/sbin/visudo -cf %s"

@@ -1,0 +1,31 @@
+---
+# https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
+
+- name: Add docker repository
+  yum_repository:
+    name: docker
+    description: Docker CE Stable
+    baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/fedora/gpg
+
+- name: Install docker engine
+  ansible.builtin.dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+- name: Add {{username}} to docker group
+  ansible.builtin.user:
+    name: "{{username}}"
+    groups: docker
+    append: yes
+
+- name: Start docker daemon
+  ansible.builtin.service:
+    name: "docker"
+    enabled: true
+    state: started
