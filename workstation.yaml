@@ -72,5 +72,10 @@
         - tailscale
 
     - import_tasks: tasks/setup-zsh.yaml
+
+    - name: Write .zshrc
+      copy:
+        src: "templates/workstation.zshrc"
+        dest: "/home/{{username}}/.zshrc"
     
     - import_tasks: tasks/setup-passwordless-sudo.yaml

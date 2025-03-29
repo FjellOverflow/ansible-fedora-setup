@@ -52,11 +52,6 @@
     repo: 'https://github.com/supercrabtree/k'
     dest:  "/home/{{username}}/.oh-my-zsh/custom/plugins/k"
 
-- name: Write .zshrc
-  copy:
-    src: "templates/.zshrc"
-    dest: "/home/{{username}}/.zshrc"
-
 - name: Write .aliases
   copy:
     src: "templates/.aliases"
