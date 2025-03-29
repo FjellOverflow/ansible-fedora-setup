@@ -72,10 +72,5 @@
         - tailscale
 
     - import_tasks: tasks/setup-zsh.yaml
-
-    - name: Enable passwordless sudo for {{username}}
-      ansible.builtin.lineinfile:
-        dest: /etc/sudoers
-        regexp: "^%wheel"
-        line: "{{username}} ALL=(ALL) NOPASSWD: ALL"
-        validate: "/usr/sbin/visudo -cf %s"
+    
+    - import_tasks: tasks/setup-passwordless-sudo.yaml
