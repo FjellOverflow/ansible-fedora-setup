@@ -1,6 +1,6 @@
 # ansible-fedora-setup
 
-A straightforward ansible playbook that sets up a fresh Fedora Workstation install (>= 41). Installs & removes packages, sets up shell and more.
+A straightforward ansible playbook that sets up a fresh Fedora install (>= 41). Installs & removes packages, sets up shell and more.
 
 >[!NOTE]
 >One shoe does not fit all feet; this playbook reflects my preferences and choice of tools when developing. Make sure to adjust the playbook to your personal needs!
@@ -28,6 +28,11 @@ ssh-copy-id 192.168.1.123
 > [!WARNING]  
 > Never blindly run scripts from the web, including this playbook. Make sure you understand its content.
 
+
 ```bash
+# for a workstation
 ansible-playbook  workstation.yaml -K
+
+# for a server
+ansible-playbook  server.yaml -K
 ```
