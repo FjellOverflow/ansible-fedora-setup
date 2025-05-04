@@ -10,6 +10,7 @@
     - name: Remove packages
       ansible.builtin.dnf:
         name:
+          - anaconda-webui
           - gnome-tour
           - yelp
           - rhythmbox
