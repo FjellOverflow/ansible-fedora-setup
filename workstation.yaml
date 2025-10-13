@@ -51,6 +51,7 @@
           - gnome-tweaks
           - timeshift
           - gparted
+          - fira-code-fonts
 
     - name: Install flatpaks
       community.general.flatpak:
