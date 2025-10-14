@@ -7,9 +7,19 @@ A straightforward ansible playbook that sets up a fresh Fedora install (>= 42). 
 
 ## Remote usage
 
-1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your machine
+1. Install `ansible` and `python3-psutil`
 
-2. Create file `hosts.yaml` in current directory
+```bash
+sudo dnf install -y ansible python3-psutil
+```
+
+2. Clone this repository
+
+```bash
+git clone https://github.com/FjellOverflow/ansible-fedora-setup.git && cd ansible-fedora-setup
+```
+
+3. Create file `hosts.yaml` in current directory
 
 ```yaml
 all:
@@ -17,13 +27,13 @@ all:
     remote-machine:
 ```
 
-3. Copy ssh-key to remote machine
+4. Copy ssh-key to remote machine
 
 ```bash
 ssh-copy-id 192.168.1.123
 ```
 
-4. Run the playbook
+5. Run the playbook
 
 > [!WARNING]  
 > Never blindly run scripts from the web, including this playbook. Make sure you understand its content.
@@ -31,15 +41,19 @@ ssh-copy-id 192.168.1.123
 
 ```bash
 # for a workstation
-ansible-playbook  workstation.yaml -K
+ansible-playbook workstation.yaml -K
 
 # for a server
-ansible-playbook  server.yaml -K
+ansible-playbook server.yaml -K
 ```
 
 ## Local usage
 
-1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your machine.
+1. Install `ansible` and `python3-psutil`
+
+```bash
+sudo dnf install -y ansible python3-psutil
+```
 
 2. Run the playbook
 
