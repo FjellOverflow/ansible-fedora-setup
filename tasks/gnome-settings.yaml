@@ -19,7 +19,7 @@
 - name: Pinned apps
   community.general.dconf:
     key: /org/gnome/shell/favorite-apps
-    value: "['org.gnome.Ptyxis.desktop', 'code.desktop', 'md.obsidian.Obsidian.desktop', 'org.gnome.Nautilus.desktop', 'com.brave.Browser.desktop']"
+    value: "['org.gnome.Ptyxis.desktop', 'com.brave.Browser.desktop', 'code.desktop', 'org.gnome.Nautilus.desktop', 'md.obsidian.Obsidian.desktop', 'org.gnome.Software.desktop', 'com.spotify.Client.desktop', 'com.bitwarden.desktop.desktop']"
 
 - name: Minimize & maximize windows
   community.general.dconf:
