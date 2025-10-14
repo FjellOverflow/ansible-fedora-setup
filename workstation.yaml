@@ -84,3 +84,4 @@
     - import_tasks: tasks/setup-passwordless-sudo.yaml
 
     - import_tasks: tasks/gnome-settings.yaml
+      become: false
