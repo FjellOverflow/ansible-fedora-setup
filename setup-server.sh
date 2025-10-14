@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+sudo dnf install -y ansible
+git clone https://github.com/FjellOverflow/ansible-fedora-setup.git
+cd ansible-fedora-setup
+ansible-playbook -i localhost, -c local server.yaml -K
+cd ..
+sudo rm -r ansible-fedora-setup
