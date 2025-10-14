@@ -67,3 +67,17 @@ ansible-playbook -i localhost, -c local workstation.yaml -K
 # for a server
 ansible-playbook -i localhost, -c local server.yaml -K
 ```
+
+## Direct run
+
+To set up the local machine with only one command use the following:
+
+```bash
+# for a workstation
+curl -fsSL https://fedora.fjelloverflow.dev/setup-workstation.sh | bash
+
+# for a workstation
+curl -fsSL https://fedora.fjelloverflow.dev/setup-server.sh | bash
+```
+
+The scripts automatically install the dependencies, clone the repository, run the playbook and clean up afterwards, all in one single command.
