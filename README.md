@@ -7,7 +7,7 @@ A straightforward ansible playbook that sets up a fresh Fedora install (>= 42). 
 
 ## Remote usage
 
-1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on local machine
+1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your machine
 
 2. Create file `hosts.yaml` in current directory
 
@@ -39,12 +39,17 @@ ansible-playbook  server.yaml -K
 
 ## Local usage
 
-You can run the playbook directly on localhost with the following command.
+1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your machine.
+
+2. Run the playbook
 
 > [!WARNING]  
 > Note the comma: `localhost,`
 
-
 ```bash
-ansible-playbook -i localhost, -c local 
+# for a workstation
+ansible-playbook -i localhost, -c local workstation.yaml -K
+
+# for a server
+ansible-playbook -i localhost, -c local server.yaml -K
 ```
