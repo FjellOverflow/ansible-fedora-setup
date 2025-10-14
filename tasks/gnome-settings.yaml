@@ -64,7 +64,7 @@
 - name: Show weekday
   community.general.dconf:
     key: /org/gnome/desktop/interface/clock-show-weekday
-    value: "'true'"
+    value: "true"
 
 - name: Calendar weeks
   community.general.dconf:
