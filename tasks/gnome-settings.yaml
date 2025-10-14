@@ -1,0 +1,121 @@
+---
+# general
+
+- name: Turn off location services
+  community.general.dconf:
+    key: /org/gnome/system/location/enabled
+    value: "false"
+
+- name: Turn off automatic problem reporting
+  community.general.dconf:
+    key: /org/gnome/desktop/privacy/report-technical-problems
+    value: "false"
+
+- name: Set dark theme
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/color-scheme
+    value: "'prefer-dark'"
+
+- name: Pinned apps
+  community.general.dconf:
+    key: /org/gnome/shell/favorite-apps
+    value: "['org.gnome.Ptyxis.desktop', 'code.desktop', 'md.obsidian.Obsidian.desktop', 'org.gnome.Nautilus.desktop', 'com.brave.Browser.desktop']"
+
+- name: Minimize & maximize windows
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/preferences/button-layout
+    value: "'appmenu:minimize,maximize,close'"
+
+
+# shortcuts
+
+- name: Close windows with SUPER + q
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/close
+    value: "['<Super>q']"
+
+- name: Launch new terminal with SUPER + ENTER
+  block:
+    - name: Register custom shortcut
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+    - name: Set custom shortcut binding
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding
+        value: "'<Super>Return'"
+    - name: Set custom shortcut command
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command
+        value: "'ptyxis --new-window'"
+    - name: Set custom shortcut name
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name
+        value: "'Launch terminal'"
+
+
+# date & time
+
+- name: 24 hour clock
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/clock-format
+    value: "'24h'"
+
+- name: Show weekday
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/clock-show-weekday
+    value: "'true'"
+
+- name: Calendar weeks
+  community.general.dconf:
+    key: /org/gnome/desktop/calendar/show-weekdate
+    value: "true"
+
+
+# terminal
+
+- name: Set terminal font
+  block:
+    - name: Disable system font
+      community.general.dconf:
+        key: /org/gnome/Ptyxis/use-system-font
+        value: "false"
+    - name: Set new font
+      community.general.dconf:
+        key: /org/gnome/Ptyxis/font-name
+        value: "'Fira Code 16'"
+
+- name: Set terminal theme
+  block:
+    - name: Read profile UUID
+      community.general.dconf:
+        key: /org/gnome/Ptyxis/default-profile-uuid
+        state: read
+      register: ptyxis_profile_uuid 
+    - name: Set profile {{ptyxis_profile_uuid.value}} to nord
+      community.general.dconf:
+        key: /org/gnome/Ptyxis/Profiles/{{ptyxis_profile_uuid.value[1:-1]}}/palette
+        value: "'nord'"
+
+- name: Turn of terminal audible bell
+  community.general.dconf:
+    key: /org/gnome/Ptyxis/audible-bell
+    value: "false"
+
+- name: Turn of terminal visual bell
+  community.general.dconf:
+    key: /org/gnome/Ptyxis/visual-bell
+    value: "false"
+
+
+# extensions
+
+- name: Enable extensions
+  community.general.dconf:
+    key: /org/gnome/shell/enabled-extensions
+    value: "['places-menu@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']"
+
+- name: Disable extensions
+  community.general.dconf:
+    key: /org/gnome/shell/disabled-extensions
+    value: "['background-logo@fedorahosted.org']"
