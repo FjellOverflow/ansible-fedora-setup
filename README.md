@@ -5,13 +5,12 @@ A straightforward ansible playbook that sets up a fresh Fedora install (>= 42). 
 >[!NOTE]
 >One shoe does not fit all feet; this playbook reflects my preferences and choice of tools when developing. Make sure to adjust the playbook to your personal needs!
 
-## Remote usage
+> [!WARNING]  
+> Never blindly run scripts from the web, including this playbook. Make sure you understand its content.
 
-1. Install `ansible` and `python3-psutil`
+## Set up remote machine
 
-```bash
-sudo dnf install -y ansible python3-psutil
-```
+1. Install [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
 2. Clone this repository
 
@@ -35,10 +34,6 @@ ssh-copy-id 192.168.1.123
 
 5. Run the playbook
 
-> [!WARNING]  
-> Never blindly run scripts from the web, including this playbook. Make sure you understand its content.
-
-
 ```bash
 # for a workstation
 ansible-playbook workstation.yaml -K
@@ -47,12 +42,12 @@ ansible-playbook workstation.yaml -K
 ansible-playbook server.yaml -K
 ```
 
-## Local usage
+## Set up local machine
 
-1. Install `ansible` and `python3-psutil`
+1. Install `ansible`
 
 ```bash
-sudo dnf install -y ansible python3-psutil
+sudo dnf install -y ansible
 ```
 
 2. Run the playbook
@@ -68,9 +63,9 @@ ansible-playbook -i localhost, -c local workstation.yaml -K
 ansible-playbook -i localhost, -c local server.yaml -K
 ```
 
-## Direct run
+## Set up local machine 
 
-To set up the local machine with only one command use the following:
+Without any extra steps, run the following commands to set up the local machine directly.
 
 ```bash
 # for a workstation
@@ -79,5 +74,3 @@ curl -fsSL https://fedora.fjelloverflow.dev/setup-workstation.sh | bash
 # for a workstation
 curl -fsSL https://fedora.fjelloverflow.dev/setup-server.sh | bash
 ```
-
-The scripts automatically install the dependencies, clone the repository, run the playbook and clean up afterwards, all in one single command.
