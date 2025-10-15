@@ -52,6 +52,7 @@
           - timeshift
           - gparted
           - fira-code-fonts
+          - python3-psutil
 
     - name: Install flatpaks
       community.general.flatpak:

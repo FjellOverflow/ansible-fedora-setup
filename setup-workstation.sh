@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo dnf install -y ansible python3-psutil
+sudo dnf install -y ansible
 git clone https://github.com/FjellOverflow/ansible-fedora-setup.git
 cd ansible-fedora-setup
 ansible-playbook -i localhost, -c local workstation.yaml -K
