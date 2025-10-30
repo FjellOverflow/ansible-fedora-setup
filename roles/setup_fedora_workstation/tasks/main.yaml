@@ -1,0 +1,67 @@
+---
+- name: Run general setup tasks
+  ansible.builtin.import_role:
+    name: setup_fedora
+
+- name: Remove packages
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - anaconda-webui
+      - gnome-tour
+      - yelp
+      - rhythmbox
+      - gnome-weather
+      - gnome-contacts
+      - gnome-calendar
+      - gnome-clocks
+      - gnome-maps
+      - gnome-characters
+      - mediawriter
+      - totem
+      - abrt-desktop
+      - abrt-gui
+      - gnome-abrt
+      - simple-scan
+      - firefox-langpacks
+      - firefox
+      - malcontent-control
+    state: absent
+
+- name: Install packages
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - syncthing
+      - gnome-tweaks
+      - timeshift
+      - gparted
+      - fira-code-fonts
+      - python3-psutil
+
+- name: Install flatpaks
+  become: true
+  community.general.flatpak:
+    name:
+      - org.freefilesync.FreeFileSync
+      - org.gimp.GIMP
+      - md.obsidian.Obsidian
+      - org.videolan.VLC
+      - com.mattjakeman.ExtensionManager
+      - com.brave.Browser
+      - org.inkscape.Inkscape
+      - com.bitwarden.desktop
+      - com.mattjakeman.ExtensionManager
+
+- name: Install external packages
+  ansible.builtin.include_role:
+    name: setup_fedora
+    tasks_from: "packages/install-{{ item }}.yaml"
+  loop:
+    - docker
+    - vscode
+    - mullvad
+    - tailscale
+
+- name: Teak GNOME settings
+  ansible.builtin.import_tasks: tasks/gnome-settings.yaml

@@ -1,19 +1,22 @@
 ---
-#https://tailscale.com/kb/1511/install-fedora-2
+# https://tailscale.com/kb/1511/install-fedora-2
 
 - name: Add Tailscale repository
-  yum_repository:
+  become: true
+  ansible.builtin.yum_repository:
     name: tailscale
     description: Tailscale stable
     baseurl: https://pkgs.tailscale.com/stable/fedora/$basearch
-    gpgcheck: yes
+    gpgcheck: true
     gpgkey: https://pkgs.tailscale.com/stable/fedora/repo.gpg
 
 - name: Install Tailscale
+  become: true
   ansible.builtin.dnf:
     name: tailscale
 
 - name: Start tailscale daemon
+  become: true
   ansible.builtin.service:
     name: "tailscaled"
     enabled: true

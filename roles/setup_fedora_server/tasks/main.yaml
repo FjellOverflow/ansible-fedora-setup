@@ -1,0 +1,81 @@
+---
+- name: Run general setup tasks
+  ansible.builtin.import_role:
+    name: setup_fedora
+
+- name: Install docker & tailscale
+  ansible.builtin.include_role:
+    name: setup_fedora
+    tasks_from: "packages/install-{{ item }}.yaml"
+  loop:
+    - docker
+    - tailscale
+
+- name: Get current user
+  ansible.builtin.set_fact:
+    setup_fedora_server_username: "{{ lookup('env', 'USER') }}"
+
+- name: Write .tmux.conf
+  ansible.builtin.copy:
+    src: "templates/.tmux.conf"
+    dest: "/home/{{ setup_fedora_server_username }}/.tmux.conf"
+    mode: "0644"
+
+- name: Autostart tmux in .zshrc
+  ansible.builtin.blockinfile:
+    path: "/home/{{ setup_fedora_server_username }}/.zshrc"
+    block: |2
+
+      ZSH_TMUX_AUTOSTART=true
+      ZSH_TMUX_DEFAULT_SESSION_NAME=default
+
+    insertafter: EOF
+
+- name: Install server specific packages
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - ufw
+      - samba
+
+- name: Disable ssh password auth
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#PasswordAuthentication yes"
+    line: "PasswordAuthentication no"
+  notify: Restart ssh daemon
+
+- name: Start samba service
+  become: true
+  ansible.builtin.service:
+    name: smb
+    state: started
+
+- name: Configure samba user for {{ setup_fedora_server_username }}
+  become: true
+  ansible.builtin.shell: >
+    set -o pipefail;
+    (pdbedit --user={{ setup_fedora_server_username }} 2>&1 > /dev/null)
+    || (echo '{{ setup_fedora_server_username }}'; echo '{{ setup_fedora_server_username }}')
+    | smbpasswd -s -a {{ setup_fedora_server_username }}
+  changed_when: "'Added user' in setup_fedora_server_samba_user_created.stdout"
+  register: setup_fedora_server_samba_user_created
+  notify: Restart samba daemon
+
+- name: Enable ufw
+  become: true
+  community.general.ufw:
+    state: enabled
+
+- name: Allow ssh in ufw
+  become: true
+  community.general.ufw:
+    rule: allow
+    name: "ssh"
+
+- name: Allow samba in ufw
+  become: true
+  community.general.ufw:
+    rule: allow
+    name: "cifs"

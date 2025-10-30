@@ -1,0 +1,77 @@
+---
+- name: Get current user
+  ansible.builtin.set_fact:
+    setup_fedora_username: "{{ lookup('env', 'USER') }}"
+
+- name: Install zsh
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - zsh
+      - git
+
+# https://github.com/ohmyzsh/ohmyzsh/wiki
+
+- name: Set zsh as default shell for {{ setup_fedora_username }}
+  become: true
+  ansible.builtin.user:
+    name: "{{ setup_fedora_username }}"
+    shell: /bin/zsh
+
+- name: Check if oh-my-zsh is installed
+  ansible.builtin.stat:
+    path: "/home/{{ setup_fedora_username }}/.oh-my-zsh"
+  register: setup_fedora_oh_my_zsh_dir
+
+- name: Install oh-my-zsh
+  when: not setup_fedora_oh_my_zsh_dir.stat.exists
+  block:
+    - name: Download oh-my-zsh installer
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: "/home/{{ setup_fedora_username }}/install_omz.sh"
+        mode: "755"
+
+    - name: Run oh-my-zsh installer
+      ansible.builtin.command: "sh /home/{{ setup_fedora_username }}/install_omz.sh --unattended" # noqa: no-changed-when
+
+- name: Remove oh-my-zsh installer
+  ansible.builtin.file:
+    path: "/home/{{ setup_fedora_username }}/install_omz.sh"
+    state: absent
+
+# https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+    dest: "/home/{{ setup_fedora_username }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    version: HEAD # noqa: latest
+
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+
+- name: Install zsh-syntax-highlighting
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "/home/{{ setup_fedora_username }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    version: HEAD # noqa: latest
+
+# https://github.com/supercrabtree/k
+
+- name: Install k
+  ansible.builtin.git:
+    repo: "https://github.com/supercrabtree/k"
+    dest: "/home/{{ setup_fedora_username }}/.oh-my-zsh/custom/plugins/k"
+    version: HEAD # noqa: latest
+
+- name: Write .aliases
+  ansible.builtin.copy:
+    src: "templates/.aliases"
+    dest: "/home/{{ setup_fedora_username }}/.aliases"
+    mode: "0644"
+
+- name: Write .zshrc
+  ansible.builtin.copy:
+    src: "templates/.zshrc"
+    dest: "/home/{{ setup_fedora_username }}/.zshrc"
+    mode: "0644"

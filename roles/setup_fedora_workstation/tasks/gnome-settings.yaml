@@ -19,13 +19,22 @@
 - name: Pinned apps
   community.general.dconf:
     key: /org/gnome/shell/favorite-apps
-    value: "['org.gnome.Ptyxis.desktop', 'com.brave.Browser.desktop', 'code.desktop', 'org.gnome.Nautilus.desktop', 'md.obsidian.Obsidian.desktop', 'org.gnome.Software.desktop', 'com.spotify.Client.desktop', 'com.bitwarden.desktop.desktop']"
+    value: >
+      [
+        'org.gnome.Ptyxis.desktop',
+        'com.brave.Browser.desktop',
+        'code.desktop',
+        'org.gnome.Nautilus.desktop',
+        'md.obsidian.Obsidian.desktop',
+        'org.gnome.Software.desktop',
+        'com.spotify.Client.desktop',
+        'com.bitwarden.desktop.desktop'
+      ]
 
 - name: Minimize & maximize windows
   community.general.dconf:
     key: /org/gnome/desktop/wm/preferences/button-layout
     value: "'appmenu:minimize,maximize,close'"
-
 
 # shortcuts
 
@@ -53,7 +62,6 @@
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name
         value: "'Launch terminal'"
 
-
 # date & time
 
 - name: 24 hour clock
@@ -70,7 +78,6 @@
   community.general.dconf:
     key: /org/gnome/desktop/calendar/show-weekdate
     value: "true"
-
 
 # terminal
 
@@ -91,10 +98,10 @@
       community.general.dconf:
         key: /org/gnome/Ptyxis/default-profile-uuid
         state: read
-      register: ptyxis_profile_uuid 
-    - name: Set profile {{ptyxis_profile_uuid.value}} to nord
+      register: setup_fedora_workstation_ptyxis_profile_uuid
+    - name: Set nord theme on profile {{ setup_fedora_workstation_ptyxis_profile_uuid.value }}
       community.general.dconf:
-        key: /org/gnome/Ptyxis/Profiles/{{ptyxis_profile_uuid.value[1:-1]}}/palette
+        key: /org/gnome/Ptyxis/Profiles/{{ setup_fedora_workstation_ptyxis_profile_uuid.value[1:-1] }}/palette
         value: "'nord'"
 
 - name: Turn of terminal audible bell
@@ -107,13 +114,14 @@
     key: /org/gnome/Ptyxis/visual-bell
     value: "false"
 
-
 # extensions
-
 - name: Enable extensions
   community.general.dconf:
     key: /org/gnome/shell/enabled-extensions
-    value: "['places-menu@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']"
+    value: >
+      [
+        'places-menu@gnome-shell-extensions.gcampax.github.com','window-list@gnome-shell-extensions.gcampax.github.com','apps-menu@gnome-shell-extensions.gcampax.github.com'
+      ]
 
 - name: Disable extensions
   community.general.dconf:

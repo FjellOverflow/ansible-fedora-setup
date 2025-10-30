@@ -1,0 +1,25 @@
+---
+- name: Upgrade packages
+  become: true
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+    update_only: true
+
+- name: Install packages
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - bat
+      - curl
+      - git
+      - ncdu
+      - tmux
+      - tree
+      - wget
+
+- name: Setup zsh
+  ansible.builtin.import_tasks: tasks/setup-zsh.yaml
+
+- name: Setup passwordless sudo
+  ansible.builtin.import_tasks: tasks/setup-passwordless-sudo.yaml
