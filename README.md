@@ -69,8 +69,8 @@ Without any extra steps, run the following commands to set up the local machine 
 
 ```bash
 # for a workstation
-curl -fsSL https://fedora.fjelloverflow.dev/setup-workstation.sh | bash
+curl -fsSL https://fedora.fjelloverflow.dev/setup/workstation | bash
 
 # for a workstation
-curl -fsSL https://fedora.fjelloverflow.dev/setup-server.sh | bash
+curl -fsSL https://fedora.fjelloverflow.dev/setup/server | bash
 ```
