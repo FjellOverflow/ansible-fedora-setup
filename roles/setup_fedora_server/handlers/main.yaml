@@ -1,10 +1,12 @@
 ---
 - name: Restart samba daemon
+  become: true
   ansible.builtin.service:
     name: smb
     state: restarted
 
 - name: Restart ssh daemon
+  become: true
   ansible.builtin.service:
     name: sshd
     state: restarted
