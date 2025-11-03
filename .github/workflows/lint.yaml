@@ -10,5 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pip install "ansible-core>=2.20.0"
       - uses: ansible/ansible-lint@main
