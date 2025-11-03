@@ -3,6 +3,6 @@
 sudo dnf install -y git ansible
 git clone https://github.com/FjellOverflow/ansible-fedora-setup.git
 cd ansible-fedora-setup
-ansible-playbook -i localhost, -c local server.yaml -K
+ansible-playbook -i localhost, -c local playbooks/server.yaml -K
 cd ..
 sudo rm -r ansible-fedora-setup
