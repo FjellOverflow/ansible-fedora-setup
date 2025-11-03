@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint:
-    runs-on: fedora-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: pip install "ansible-core>=2.20.0"
