@@ -4,10 +4,10 @@ name: lint
 on:
   push:
   workflow_dispatch:
-
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: ansible-galaxy collection install community.general
       - uses: ansible/ansible-lint@main
