@@ -23,13 +23,11 @@
 
 - name: Autostart tmux in .zshrc
   ansible.builtin.blockinfile:
-    path: "/home/{{ setup_fedora_server_username }}/.zshrc"
-    block: |2
-
+    path: "/home/yannick/.zshrc"
+    insertafter: "plugins=\\("
+    block: |
       ZSH_TMUX_AUTOSTART=true
       ZSH_TMUX_DEFAULT_SESSION_NAME=default
-
-    insertafter: EOF
 
 - name: Install server specific packages
   become: true
