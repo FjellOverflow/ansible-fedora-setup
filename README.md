@@ -1,11 +1,28 @@
-# ansible-fedora-setup
+<h1 align="center">
+  ansible-fedora-setup
+</h1>
 
-A straightforward ansible playbook that sets up a fresh Fedora install (>= 42). Installs & removes packages, sets up shell and more.
+<p align="center">
+  Straightforward ansible playbooks that set up a fresh Fedora install.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/v/tag/FjellOverflow/ansible-fedora-setup?label=Version&color=success"/>
+  &ensp;
+  <img src="https://img.shields.io/github/license/FjellOverflow/ansible-fedora-setup?label=License&color=success"/>
+  &ensp;
+  <img src="https://img.shields.io/github/actions/workflow/status/FjellOverflow/ansible-fedora-setup/lint.yaml?branch=main&label=CI"/>
+</p>
+
+<p align="center">
+  <a href="#the-game">Direct usage</a> |
+  <a href="#installation">Local usage</a> |
+  <a href="#development">Remote usage</a>
+</p>
+
+A straightforward ansible playbook that sets up a fresh Fedora (Workstation & Server edition, >= 42) install. Adds & removes packages, sets up shell, tweaks GNOME & more.
 
 ## Usage
-
->[!NOTE]
->One shoe does not fit all feet; this playbook reflects my preferences and choice of tools when developing. Make sure to adjust the playbook to your personal needs!
 
 > [!WARNING]  
 > Never blindly run scripts from the web, including this playbook. Make sure you understand its content.
@@ -24,15 +41,7 @@ curl -fsSL https://fedora.fjelloverflow.dev/setup/server | bash
 
 ### Local
 
-Run the playbook with ansible on your local machine.
-
-1. Install [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-
-2. Clone this repository
-
-```bash
-git clone https://github.com/FjellOverflow/ansible-fedora-setup.git && cd ansible-fedora-setup
-```
+To run the playbook with ansible on your local machine, use the following steps.
 
 1. Install `ansible`
 
@@ -40,7 +49,14 @@ git clone https://github.com/FjellOverflow/ansible-fedora-setup.git && cd ansibl
 sudo dnf install -y ansible
 ```
 
-2. Run the playbook
+2. Clone this repository
+
+```bash
+git clone https://github.com/FjellOverflow/ansible-fedora-setup.git && cd ansible-fedora-setup
+```
+
+
+3. Run the playbook
 
 > [!WARNING]  
 > Note the comma: `localhost,`
@@ -55,9 +71,13 @@ ansible-playbook -i localhost, -c local playbooks/server.yaml -K
 
 ### Remote
 
-Set up a remote machine by running the playbook through ssh.
+To set up a remote machine, by running the playbook through ssh, follow these steps.
 
-1. Install [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+1. Install `ansible`
+
+```bash
+sudo dnf install -y ansible
+```
 
 2. Clone this repository
 
