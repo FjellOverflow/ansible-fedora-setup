@@ -15,9 +15,8 @@
 </p>
 
 <p align="center">
-  <a href="#the-game">Direct usage</a> |
-  <a href="#installation">Local usage</a> |
-  <a href="#development">Remote usage</a>
+  <a href="#usage">Usage</a> |
+  <a href="#development">Development</a>
 </p>
 
 A straightforward ansible playbook that sets up a fresh Fedora (Workstation & Server edition, >= 42) install. Adds & removes packages, sets up shell, tweaks GNOME & more.
