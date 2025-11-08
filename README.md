@@ -7,9 +7,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/tag/FjellOverflow/ansible-fedora-setup?label=Version&color=success"/>
+  <img src="https://img.shields.io/github/v/tag/FjellOverflow/ansible-fedora-setup?label=Version"/>
   &ensp;
-  <img src="https://img.shields.io/github/license/FjellOverflow/ansible-fedora-setup?label=License&color=success"/>
+  <img src="https://img.shields.io/github/license/FjellOverflow/ansible-fedora-setup?label=License"/>
   &ensp;
   <img src="https://img.shields.io/github/actions/workflow/status/FjellOverflow/ansible-fedora-setup/lint.yaml?branch=main&label=CI"/>
 </p>
