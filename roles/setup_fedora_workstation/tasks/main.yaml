@@ -11,8 +11,8 @@
     name: "{{ item }}"
     state: absent
   loop:
-    - anaconda-webui
     - anaconda-live
+    - anaconda-webui
     - gnome-tour
     - yelp
     - rhythmbox
