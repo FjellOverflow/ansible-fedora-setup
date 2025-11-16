@@ -5,28 +5,31 @@
 
 - name: Remove packages
   become: true
+  ignore_errors: true
+  register: setup_fedora_workstation_
   ansible.builtin.dnf:
-    name:
-      - anaconda-live
-      - gnome-tour
-      - yelp
-      - rhythmbox
-      - gnome-weather
-      - gnome-contacts
-      - gnome-calendar
-      - gnome-clocks
-      - gnome-maps
-      - gnome-characters
-      - mediawriter
-      - totem
-      - abrt-desktop
-      - abrt-gui
-      - gnome-abrt
-      - simple-scan
-      - firefox-langpacks
-      - firefox
-      - malcontent-control
+    name: "{{ item }}"
     state: absent
+  loop:
+    - anaconda-live
+    - gnome-tour
+    - yelp
+    - rhythmbox
+    - gnome-weather
+    - gnome-contacts
+    - gnome-calendar
+    - gnome-clocks
+    - gnome-maps
+    - gnome-characters
+    - mediawriter
+    - totem
+    - abrt-desktop
+    - abrt-gui
+    - gnome-abrt
+    - simple-scan
+    - firefox-langpacks
+    - firefox
+    - malcontent-control
 
 - name: Install packages
   become: true
