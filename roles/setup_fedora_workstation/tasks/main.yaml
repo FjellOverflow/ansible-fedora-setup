@@ -11,6 +11,7 @@
     name: "{{ item }}"
     state: absent
   loop:
+    - anaconda-webui
     - anaconda-live
     - gnome-tour
     - yelp
