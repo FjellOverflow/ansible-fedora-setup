@@ -1,5 +1,5 @@
 <h1 align="center">
-  ansible-fedora-setup
+  Ansible Fedora Setup
 </h1>
 
 <p align="center">
