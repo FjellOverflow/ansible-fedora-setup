@@ -15,11 +15,32 @@
 </p>
 
 <p align="center">
+  <a href="#contents">Contents</a> |
   <a href="#usage">Usage</a> |
   <a href="#development">Development</a>
 </p>
 
 A straightforward ansible playbook that sets up a fresh Fedora (Workstation & Server edition, >= 42) install. Adds & removes packages, sets up shell, tweaks GNOME & more.
+
+## Contents
+
+The playbook contains the following tasks:
+
+| Fedora                                | Workstation | Server |
+|---------------------------------------|-------------|--------|
+| Upgrade packages                      | ✅          | ✅     |
+| Remove packages                       | ✅          | ❌     |
+| Install deskop apps                   | ✅          | ❌     |
+| Install docker                        | ✅          | ✅     |
+| Install taiscale                      | ✅          | ✅     |
+| Install small utilities               | ✅          | ✅     |
+| Setup zsh (oh-my-zsh, plugins)        | ✅          | ✅     |
+| Enable passwordless sudo              | ✅          | ✅     |
+| Setup tmux                            | ❌          | ✅     |
+| Setup samba                           | ❌          | ✅     |
+| Setup ufw                             | ❌          | ✅     |
+| Disable ssh password auth             | ❌          | ✅     |
+| Adjust GNOME settings                 | ✅          | ❌     |
 
 ## Usage
 
