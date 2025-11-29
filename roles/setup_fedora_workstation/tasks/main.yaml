@@ -63,7 +63,7 @@
     tasks_from: "packages/install-{{ item }}.yaml"
   loop:
     - docker
-    - vscode
+    - vscodium
     - mullvad
     - tailscale
 
