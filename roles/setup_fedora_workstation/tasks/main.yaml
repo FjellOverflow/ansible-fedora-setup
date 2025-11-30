@@ -38,7 +38,6 @@
     name:
       - syncthing
       - gnome-tweaks
-      - timeshift
       - gparted
       - fira-code-fonts
       - python3-psutil
@@ -56,6 +55,7 @@
       - org.inkscape.Inkscape
       - com.bitwarden.desktop
       - com.mattjakeman.ExtensionManager
+      - org.gnome.DejaDup
 
 - name: Install external packages
   ansible.builtin.include_role:
