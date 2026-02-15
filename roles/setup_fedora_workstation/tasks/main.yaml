@@ -56,6 +56,7 @@
       - com.bitwarden.desktop
       - com.mattjakeman.ExtensionManager
       - org.gnome.DejaDup
+      - com.usebruno.Bruno
 
 - name: Install external packages
   ansible.builtin.include_role:
