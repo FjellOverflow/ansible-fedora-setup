@@ -23,7 +23,7 @@
 
 - name: Autostart tmux in .zshrc
   ansible.builtin.blockinfile:
-    path: "/home/yannick/.zshrc"
+    path: "/home/{{ setup_fedora_server_username }}/.zshrc"
     insertafter: "plugins=\\("
     block: |
       ZSH_TMUX_AUTOSTART=true
