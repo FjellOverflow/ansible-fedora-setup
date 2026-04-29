@@ -32,6 +32,10 @@
     - firefox
     - malcontent-control
 
+- name: Autoremove orphan dependencies
+  ansible.builtin.dnf:
+    autoremove: true
+
 - name: Install packages
   become: true
   ansible.builtin.dnf:
