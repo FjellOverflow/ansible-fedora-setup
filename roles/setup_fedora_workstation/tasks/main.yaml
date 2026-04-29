@@ -33,6 +33,7 @@
     - malcontent-control
 
 - name: Autoremove orphan dependencies
+  become: true
   ansible.builtin.dnf:
     autoremove: true
 
