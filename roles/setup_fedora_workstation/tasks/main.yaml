@@ -57,6 +57,8 @@
       - com.mattjakeman.ExtensionManager
       - org.gnome.DejaDup
       - com.usebruno.Bruno
+      - com.spotify.Client
+      - org.torproject.torbrowser-launcher
 
 - name: Install external packages
   ansible.builtin.include_role:
