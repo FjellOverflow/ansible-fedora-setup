@@ -4,8 +4,8 @@
 - name: Import Microsoft key
   become: true
   ansible.builtin.rpm_key:
-  state: present
-  key: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: Add VSCode repository
   become: true
@@ -13,11 +13,9 @@
     name: code
     description: Visual Studio Code
     baseurl: https://packages.microsoft.com/yumrepos/vscode
-    enabled: yes
-    autorefresh: yes
-    type: rpm-md
-    gpgcheck: yes
-    repo_gpgcheck: yes
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: true
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: Install VSCode
