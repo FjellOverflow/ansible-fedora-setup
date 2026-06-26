@@ -1,7 +1,7 @@
 ---
 - name: Get current user
   ansible.builtin.set_fact:
-    setup_fedora_username: "{{ lookup('env', 'USER') }}"
+    setup_fedora_username: "{{ ansible_user_id }}"
 
 - name: Install zsh
   become: true

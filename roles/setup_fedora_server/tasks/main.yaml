@@ -13,7 +13,7 @@
 
 - name: Get current user
   ansible.builtin.set_fact:
-    setup_fedora_server_username: "{{ lookup('env', 'USER') }}"
+    setup_fedora_server_username: "{{ ansible_user_id }}"
 
 - name: Write .tmux.conf
   ansible.builtin.copy:
