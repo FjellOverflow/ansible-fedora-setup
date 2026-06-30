@@ -47,9 +47,17 @@
       - fira-code-fonts
       - python3-psutil
 
+- name: Enable flathub remote
+  community.general.flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+    state: present
+    enabled: true
+
 - name: Install flatpaks
-  become: true
   community.general.flatpak:
+    method: user
     name:
       - org.freefilesync.FreeFileSync
       - org.gimp.GIMP
@@ -59,7 +67,6 @@
       - com.brave.Browser
       - org.inkscape.Inkscape
       - com.bitwarden.desktop
-      - com.mattjakeman.ExtensionManager
       - org.gnome.DejaDup
       - com.usebruno.Bruno
       - com.spotify.Client
