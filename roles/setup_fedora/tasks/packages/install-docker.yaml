@@ -1,10 +1,6 @@
 ---
 # https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
 
-- name: Get current user
-  ansible.builtin.set_fact:
-    setup_fedora_username: "{{ ansible_user_id }}"
-
 - name: Add docker repository
   become: true
   ansible.builtin.yum_repository:

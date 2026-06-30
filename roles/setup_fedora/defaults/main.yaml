@@ -1,0 +1,2 @@
+---
+setup_fedora_username: "{{ ansible_facts['user_id'] }}"
